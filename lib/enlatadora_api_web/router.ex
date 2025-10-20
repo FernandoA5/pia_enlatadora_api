@@ -16,6 +16,10 @@ defmodule EnlatadoraApiWeb.Router do
 
     ## --------- Compras ---------
     resources "/compras_materia_prima", CompraMateriaPrimaController, except: [:new, :edit]
+    get "/obtener_compras_materia_prima", CompraMateriaPrimaController, :obtener_compras_materia_prima
+
+    ## --------- Ventas ---------
+
 
 
   end

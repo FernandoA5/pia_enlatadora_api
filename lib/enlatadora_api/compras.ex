@@ -5,20 +5,19 @@ defmodule EnlatadoraApi.Compras do
 
   import Ecto.Query, warn: false
   alias EnlatadoraApi.Repo
+  alias EnlatadoraApi.Utils
+  alias EnlatadoraApi.Utils.OrderedMap
+  alias EnlatadoraApi.ErrorHandler
 
   alias EnlatadoraApi.Compras.CompraMateriaPrima
 
   @doc """
-  Returns the list of compras_materia_prima.
-
-  ## Examples
-
-      iex> list_compras_materia_prima()
-      [%CompraMateriaPrima{}, ...]
-
+  Ejecuta el procedimiento almacenado `Compras.obtener_compras_materia_prima` y
+  devuelve la lista de compras con el nombre del proveedor asociado.
   """
-  def list_compras_materia_prima do
-    Repo.all(CompraMateriaPrima)
+  def obtener_compras_materia_prima do
+    "Compras.obtener_compras_materia_prima"
+    |> Utils.exec_sp_with_error_handling_ordered(%{}, ErrorHandler)
   end
 
   @doc """

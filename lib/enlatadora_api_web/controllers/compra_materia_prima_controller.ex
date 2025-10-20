@@ -40,4 +40,10 @@ defmodule EnlatadoraApiWeb.CompraMateriaPrimaController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def obtener_compras_materia_prima(conn, _params) do
+    with {:ok, resultado} <- Compras.obtener_compras_materia_prima() do
+      render(conn, :show, compra_materia_prima: resultado)
+    end
+  end
 end
