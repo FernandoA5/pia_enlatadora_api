@@ -33,11 +33,20 @@ defmodule EnlatadoraApi.Repo.Migrations.CreateObtenerComprasMateriaPrimaSp do
         cmp.id_proveedor,
         prov.nombre AS nombre_proveedor,
         cmp.fecha_compra,
-        cmp.total,
+        COALESCE(SUM(detalle.cantidad * detalle.precio_unitario), 0) AS total,
         cmp.activo
       FROM Compras.compras_materia_prima AS cmp
       LEFT JOIN Catalogo.proveedores AS prov
-        ON prov.id = cmp.id_proveedor;
+        ON prov.id = cmp.id_proveedor
+      LEFT JOIN Compras.detalle_compras AS detalle
+        ON detalle.id_compra = cmp.id
+        AND detalle.activo = 1
+      GROUP BY
+        cmp.id,
+        cmp.id_proveedor,
+        prov.nombre,
+        cmp.fecha_compra,
+        cmp.activo;
     END');
     """
   end

@@ -18,6 +18,10 @@ defmodule EnlatadoraApiWeb.Router do
     resources "/compras_materia_prima", CompraMateriaPrimaController, except: [:new, :edit]
     get "/obtener_compras_materia_prima", CompraMateriaPrimaController, :obtener_compras_materia_prima
 
+    resources "/detalle_compras", DetalleCompraController, except: [:new, :edit]
+    post "/registrar_detalles_compra", DetalleCompraController, :registrar_detalles_compra
+    get "/obtener_detalles_compra_by_id_compra", DetalleCompraController, :obtener_detalles_compra_by_id_compra
+
     ## --------- Ventas ---------
 
 
