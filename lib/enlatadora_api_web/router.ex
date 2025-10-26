@@ -25,6 +25,9 @@ defmodule EnlatadoraApiWeb.Router do
     ## --------- Pedido ---------
     resources "/pedidos", PedidoController, except: [:new, :edit]
     get "/obtener_pedidos", PedidoController, :obtener_pedidos
+    resources "/detalles_pedido", DetallePedidoController, except: [:new, :edit]
+    post "/registrar_detalles_pedido", DetallePedidoController, :registrar_detalles_pedido
+    get "/obtener_detalles_pedido_by_id_pedido", DetallePedidoController, :obtener_detalles_pedido_by_id_pedido
 
 
     ## --------- Produccion ---------

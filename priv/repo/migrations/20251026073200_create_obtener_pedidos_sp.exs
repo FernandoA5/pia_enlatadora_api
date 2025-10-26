@@ -32,7 +32,12 @@ defmodule EnlatadoraApi.Repo.Migrations.CreateObtenerPedidosSp do
         p.id,
         COALESCE(c.nombre, ''Sin cliente'') AS cliente,
         p.id_cliente,
-        p.total,
+        COALESCE((
+          SELECT SUM(dp.cantidad * dp.precio_unitario)
+          FROM Pedido.detalles_pedido AS dp
+          WHERE dp.id_pedido = p.id
+            AND dp.activo = 1
+        ), 0) AS total,
         p.fecha_pedido,
         p.activo
       FROM Pedido.pedidos AS p
