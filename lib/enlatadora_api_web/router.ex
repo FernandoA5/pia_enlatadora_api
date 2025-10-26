@@ -22,7 +22,9 @@ defmodule EnlatadoraApiWeb.Router do
     post "/registrar_detalles_compra", DetalleCompraController, :registrar_detalles_compra
     get "/obtener_detalles_compra_by_id_compra", DetalleCompraController, :obtener_detalles_compra_by_id_compra
 
-    ## --------- Ventas ---------
+    ## --------- Pedido ---------
+    resources "/pedidos", PedidoController, except: [:new, :edit]
+    get "/obtener_pedidos", PedidoController, :obtener_pedidos
 
 
     ## --------- Produccion ---------
