@@ -29,7 +29,7 @@ defmodule EnlatadoraApiWeb.CompraMateriaPrimaJSON do
     }
   end
 
-  defp data(%OrderedMap{data: data}), do: data
+  defp data(%OrderedMap{} = ordered), do: ordered
   defp data(%{} = map), do: map
   defp data(other), do: %{value: other}
 end

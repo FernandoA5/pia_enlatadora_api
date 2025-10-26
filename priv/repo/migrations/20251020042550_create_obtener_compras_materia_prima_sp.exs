@@ -29,11 +29,11 @@ defmodule EnlatadoraApi.Repo.Migrations.CreateObtenerComprasMateriaPrimaSp do
       SET NOCOUNT ON;
 
       SELECT
+        prov.nombre AS nombre_proveedor,
+        COALESCE(SUM(detalle.cantidad * detalle.precio_unitario), 0) AS total,
+        cmp.fecha_compra,
         cmp.id AS id_compra,
         cmp.id_proveedor,
-        prov.nombre AS nombre_proveedor,
-        cmp.fecha_compra,
-        COALESCE(SUM(detalle.cantidad * detalle.precio_unitario), 0) AS total,
         cmp.activo
       FROM Compras.compras_materia_prima AS cmp
       LEFT JOIN Catalogo.proveedores AS prov

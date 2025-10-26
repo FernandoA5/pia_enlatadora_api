@@ -25,6 +25,10 @@ defmodule EnlatadoraApiWeb.Router do
     ## --------- Ventas ---------
 
 
+    ## --------- Produccion ---------
+    resources "/producciones", ProduccionController, except: [:new, :edit]
+    get "/obtener_producciones", ProduccionController, :obtener_producciones
+
 
   end
 

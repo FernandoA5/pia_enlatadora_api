@@ -46,14 +46,7 @@ defmodule EnlatadoraApi.Utils do
 
       list = parse_sp_result_with_order(rows, columns)
 
-      # Normalizar resultado para procedimientos que devuelven un solo registro
-      # Si hay exactamente un elemento en la lista, lo extraemos
-      result = case list do
-        [single_item] when length(list) == 1 -> single_item
-        other -> other
-      end
-
-      result = maybe_handle_success(error_handler, result, attrs)
+      result = maybe_handle_success(error_handler, list, attrs)
 
       {:ok, result}
     rescue
