@@ -31,14 +31,20 @@ defmodule EnlatadoraApi.Repo.Migrations.CreateObtenerProduccionesSp do
       SELECT
         producto.nombre AS nombre_producto,
         prod.cantidad_producida,
-        prod.estado,
+        COALESCE(control.resultado, prod.estado) AS estado,
         prod.fecha_produccion,
         prod.id,
         prod.activo,
         prod.id_producto
       FROM Produccion.producciones AS prod
       LEFT JOIN Catalogo.productos AS producto
-        ON producto.id = prod.id_producto;
+        ON producto.id = prod.id_producto
+      OUTER APPLY (
+        SELECT TOP 1 c.resultado
+        FROM Produccion.controles_calidad AS c
+        WHERE c.id_produccion = prod.id
+        ORDER BY c.fecha_control DESC, c.id DESC
+      ) AS control;
     END');
     """
   end

@@ -28,6 +28,8 @@ defmodule EnlatadoraApiWeb.Router do
     ## --------- Produccion ---------
     resources "/producciones", ProduccionController, except: [:new, :edit]
     get "/obtener_producciones", ProduccionController, :obtener_producciones
+    resources "/controles_calidad", ControlCalidadController, except: [:new, :edit]
+    get "/obtener_control_calidad_por_produccion", ControlCalidadController, :obtener_control_calidad_por_produccion
 
 
   end
